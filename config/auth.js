@@ -1,15 +1,17 @@
 module.exports = {
-  ensureAuthenticated: function(req, res, next) {
+  // agar user tidak bisa masuk ke halaman dashboard sebelum login
+  ensureAuthenticated: function (req, res, next) {
     if (req.isAuthenticated()) {
       return next();
     }
-    req.flash('error_msg', 'Please log in to view that resource');
-    res.redirect('/users/login');
+    req.flash("error_msg", "Please log in to view that resource");
+    res.redirect("/users/login");
   },
-  forwardAuthenticated: function(req, res, next) {
+  // kalau user sudah login
+  forwardAuthenticated: function (req, res, next) {
     if (!req.isAuthenticated()) {
       return next();
     }
-    res.redirect('/dashboard');      
-  }
+    res.redirect("/dashboard");
+  },
 };
